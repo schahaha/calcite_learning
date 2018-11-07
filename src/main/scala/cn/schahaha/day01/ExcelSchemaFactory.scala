@@ -1,5 +1,6 @@
 package cn.schahaha.day01
 
+import java.io.File
 import java.util
 
 import org.apache.calcite.schema.{Schema, SchemaFactory, SchemaPlus}
@@ -23,20 +24,13 @@ class ExcelSchemaFactory extends SchemaFactory{
 
     val filePath: String = map.get("filepath").toString
 
-    if(!filePath.endsWith(".xls") || !filePath.endsWith(".xlsx")){
+    if(!filePath.endsWith(".xls") && !filePath.endsWith(".xlsx")){
 
       println(filePath+" is not a proper  excel file!")
       throw new RuntimeException
     }
 
-
-
-
-
-
-
-
-
+    new ExcelSchema(new File(filePath))
 
   }
 }

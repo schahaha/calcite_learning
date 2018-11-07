@@ -1,0 +1,18 @@
+
+{
+  version :'1.0',
+  defaultSchema :'test',
+  schemas :[
+    {
+      name :'test',
+      type :'custom',
+      factory : 'cn.schahaha.day01.ExcelSchemaFactory',
+      operand: {
+        filepath: 'C:/Users/shicheng_work_pc/Desktop/data/PEOPLE.xlsx'
+      }
+      
+    }
+  ]
+
+}
+

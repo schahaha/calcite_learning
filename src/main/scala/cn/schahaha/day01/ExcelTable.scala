@@ -16,13 +16,17 @@ import scala.util.control.Breaks
 abstract  class  ExcelTable(val file:File)  extends AbstractTable{
 
 
+  val names=new util.ArrayList[String]()
+  val types=new util.ArrayList[RelDataType]()
+
+
 
   override def getRowType(relDataTypeFactory: RelDataTypeFactory): RelDataType = {
 
 
-        val dataType: RelDataType = getFirstLineType(file,relDataTypeFactory)
+    val dataType: RelDataType = getFirstLineType(file,relDataTypeFactory)
 
-        dataType
+    dataType
 
   }
 
@@ -30,8 +34,6 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
   protected def getFirstLineType(file:File,relDataTypeFactory:RelDataTypeFactory)={
 
 
-    val names=new util.ArrayList[String]()
-    val types=new util.ArrayList[RelDataType]()
 
 
     if(!file.exists()){

@@ -11,8 +11,6 @@ object HelloWorld {
 
   def main(args: Array[String]): Unit = {
 
-
-
     Class.forName("org.apache.calcite.jdbc.Driver")
 
 
@@ -21,7 +19,7 @@ object HelloWorld {
     //3.和oracle一样,sql里面的表名和列名会被 转换为大写.所以文件内容也要使用 大写,不然无法匹配上.
     val connection: Connection = DriverManager.getConnection("jdbc:calcite:model=target/classes/day01/table.json")
 
-    val ps: PreparedStatement = connection.prepareStatement("select * from people a join people b on a.age=b.age")
+    val ps: PreparedStatement = connection.prepareStatement("select count(1) from (select * from people a join people b on a.age=b.age) c  ")
 
     val rs: ResultSet = ps.executeQuery()
 
