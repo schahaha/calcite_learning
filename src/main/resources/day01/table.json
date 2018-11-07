@@ -1,0 +1,18 @@
+
+{
+  version :'1.0',
+  defaultSchema :'test',
+  schemas :[
+    {
+      name :'test',
+      type :'custom',
+      factory : 'org.apache.calcite.adapter.csv.CsvSchemaFactory',
+      operand: {
+        directory: 'C:/Users/shicheng_work_pc/Desktop/data'
+      }
+      
+    }
+  ]
+
+}
+
