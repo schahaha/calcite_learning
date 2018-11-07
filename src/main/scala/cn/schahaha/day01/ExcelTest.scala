@@ -10,7 +10,7 @@ object ExcelTest {
 
     val connection: Connection = DriverManager.getConnection("jdbc:calcite:model=target/classes/day01/excel.json")
 
-    val ps: PreparedStatement = connection.prepareStatement("select * from PEOPLE")
+    val ps: PreparedStatement = connection.prepareStatement("select * from PEOPLE   limit 2")
     val rs: ResultSet = ps.executeQuery()
 
     val count: Int = rs.getMetaData.getColumnCount

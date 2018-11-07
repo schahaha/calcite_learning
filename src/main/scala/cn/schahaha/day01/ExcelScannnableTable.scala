@@ -19,7 +19,7 @@ import org.apache.calcite.schema.ScannableTable
       override def enumerator(): Enumerator[Array[AnyRef]] = {
 
 
-        new ExcelEnumerator[Array[AnyRef]](file,types)
+        new ExcelEnumerator[Array[AnyRef]](file,rawTypes)
 
       }
     }

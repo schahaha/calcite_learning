@@ -15,23 +15,26 @@ import scala.util.control.Breaks
   */
 abstract  class  ExcelTable(val file:File)  extends AbstractTable{
 
+  var types=new util.ArrayList[RelDataType]()
+  var rawTypes=new util.ArrayList[String]()
 
-  val names=new util.ArrayList[String]()
-  val types=new util.ArrayList[RelDataType]()
 
 
 
   override def getRowType(relDataTypeFactory: RelDataTypeFactory): RelDataType = {
 
+    val names=new util.ArrayList[String]()
+    val types=new util.ArrayList[RelDataType]()
 
-    val dataType: RelDataType = getFirstLineType(file,relDataTypeFactory)
+    val dataType: RelDataType = getFirstLineType(file,relDataTypeFactory,names)
+
 
     dataType
 
   }
 
 
-  protected def getFirstLineType(file:File,relDataTypeFactory:RelDataTypeFactory)={
+  protected def getFirstLineType(file:File,relDataTypeFactory:RelDataTypeFactory,names:util.ArrayList[String])={
 
 
 
@@ -46,6 +49,8 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
     val sheet: XSSFSheet = workbook.getSheetAt(0)
 
     val breaks = new Breaks
+
+
 
 
     //解析列名
@@ -75,6 +80,7 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
       }
 
     }
+    rawTypes.clear()
 
     //获取每列的类型
     val row1: XSSFRow = sheet.getRow(1)
@@ -119,6 +125,7 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
 
   protected def getFiledRawType(line:String):String={
 
+
     //判断是否是数字
 
     try{
@@ -128,12 +135,14 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
       try{
 
         line.toInt
+        rawTypes.add("int")
         //是整数
         "int"
 
       }catch {
         case  ex:Exception=>{
           //是小数,不是整数
+          rawTypes.add("double")
           "double"
 
         }
@@ -144,6 +153,7 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
 
       case ex:Exception=>{
         //不是数字
+        rawTypes.add("string")
         "string"
 
       }

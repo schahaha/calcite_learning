@@ -17,6 +17,7 @@ import org.apache.calcite.schema.impl.AbstractSchema
 class ExcelSchema(val file:File) extends AbstractSchema{
 
 
+
   /**
     * 遍历文件, 将tableName和file对应在一个map中
     * @return
@@ -26,13 +27,12 @@ class ExcelSchema(val file:File) extends AbstractSchema{
     val fileName: String = file.getName
     val tableName: String = fileName.substring(0,fileName.lastIndexOf("."))
 
-
     val builder: ImmutableMap.Builder[String, Table] = ImmutableMap.builder()
 
     val table = new ExcelScannnableTable(file)
 
-    builder.put(tableName,table)
 
+    builder.put(tableName,table)
     builder.build()
 
 
