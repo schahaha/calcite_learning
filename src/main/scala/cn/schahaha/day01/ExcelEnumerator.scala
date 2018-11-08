@@ -41,12 +41,15 @@ class ExcelEnumerator[E](val file:File,val types:java.util.List[String]) extends
 
 
 
+
+
           line.add(
 
             types.get(x) match {
 
 
-              case _ =>cell.getRawValue.asInstanceOf[Object]
+              case "string"=>cell.getStringCellValue.asInstanceOf[Object]
+              case _=>cell.getNumericCellValue.asInstanceOf[Object]
 
             }
 

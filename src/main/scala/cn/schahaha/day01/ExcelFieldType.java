@@ -11,8 +11,8 @@ import java.util.Map;
 public enum ExcelFieldType {
 
     String(java.lang.String.class,"string"),
-    Integer(java.lang.Integer.class,"int"),
-    Double(java.lang.Double.class,"double"),
+
+    Number(java.lang.Double.class,"number"),
     Boolean(java.lang.Boolean.class,"boolean");
 
     public final static Map<String,Class> MAP=new HashMap<String, Class>();

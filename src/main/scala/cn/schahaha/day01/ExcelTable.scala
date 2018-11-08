@@ -5,6 +5,7 @@ import java.util
 
 import org.apache.calcite.rel.`type`.{RelDataType, RelDataTypeFactory}
 import org.apache.calcite.schema.impl.AbstractTable
+import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.xssf.usermodel.{XSSFCell, XSSFRow, XSSFSheet, XSSFWorkbook}
 
 import scala.util.control.Breaks
@@ -91,9 +92,11 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
 
       if(cell!=null){
 
-        val value: String = cell.getRawValue
 
-        val rawType: String = getFiledRawType(value)
+
+        val rawType: String = getFiledRawType(cell)
+
+
 
         types.add(relDataTypeFactory.createJavaType(ExcelFieldType.MAP.get(rawType)))
 
@@ -123,45 +126,27 @@ abstract  class  ExcelTable(val file:File)  extends AbstractTable{
   }
 
 
-  protected def getFiledRawType(line:String):String={
+  protected def getFiledRawType(cell: XSSFCell):String={
+
+      val cellType: Int = cell.getCellType
+
+      cellType match {
+      case 1 =>"string"
+      case 0=>"number"
+      case 4=>"boolean"
+      case 3=>"null"
+      case 5=>"error"
+      case _=>"null"
 
 
-    //判断是否是数字
 
-    try{
-
-      line.toDouble
-
-      try{
-
-        line.toInt
-        rawTypes.add("int")
-        //是整数
-        "int"
-
-      }catch {
-        case  ex:Exception=>{
-          //是小数,不是整数
-          rawTypes.add("double")
-          "double"
-
-        }
-
-      }
-
-    }catch {
-
-      case ex:Exception=>{
-        //不是数字
-        rawTypes.add("string")
-        "string"
-
-      }
 
     }
 
 
+
   }
+
 
 
 
