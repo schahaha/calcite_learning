@@ -13,8 +13,7 @@ import org.apache.calcite.sql.type.SqlTypeName;
  * 简单的方式：
  * 直接继承AbstractTable（相当于BaseTable）,拥有一些基本功能后，再继续实现功能，比如ScannableTable
  *
- * 经过测试：
- *    单表：select  where group by  order by 都可以使用
+ * 这种实现方式，SQL中的所有操作，都是通过扫描全表而得来的，然后在进行加工，效率是非常低下的。仅仅是试验用而已。
  */
 public class TextScannerTable extends TextTable implements ScannableTable {
 

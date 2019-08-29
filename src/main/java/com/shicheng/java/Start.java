@@ -14,7 +14,7 @@ public class Start {
         //3.和oracle一样,sql里面的表名和列名会被 转换为大写.所以文件内容也要使用 大写,不然无法匹配上.
        Connection connection= DriverManager.getConnection("jdbc:calcite:model=target/classes/day01/excel.json");
 
-        PreparedStatement preparedStatement = connection.prepareStatement("select sum(id) ,sex   from table1  group by sex    ");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from table1 a join table1 b on a.sex=b.sex   ");
 
         ResultSet rs = preparedStatement.executeQuery();
 
