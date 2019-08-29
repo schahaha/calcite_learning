@@ -6,9 +6,9 @@
     {
       name :'test',
       type :'custom',
-      factory : 'cn.schahaha.day01.ExcelSchemaFactory',
+      factory : 'com.shicheng.java.MySchemaFactory',
       operand: {
-        filepath: 'C:/Users/shicheng_work_pc/Desktop/data/PEOPLE.xlsx'
+        filePath: 'C:/Users/shich/Desktop/demo.txt'
       }
       
     }

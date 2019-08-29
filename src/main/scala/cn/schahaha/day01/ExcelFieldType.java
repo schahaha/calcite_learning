@@ -1,6 +1,6 @@
 package cn.schahaha.day01;
 
-import scala.Int;
+
 
 import java.util.HashMap;
 import java.util.Map;
